@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   public loginForm!: FormGroup;
-  public loginAuthResp: any;
+  public authResponse: any;
   public hide : boolean = true;
   public emailLabel : string = 'Email Address';
   public passwordLabel : string = 'Password';
@@ -25,31 +26,50 @@ export class SignInComponent implements OnInit {
   public valid : boolean = false;
   
   constructor(
+    public loginAuthentication: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private injector: Injector
   ) {}
 
   ngOnInit(): void {
     this.initialize();
   }
-  // validating forms function
+
   initialize(): void {
     this.loginForm = this.formBuilder.group({
       email: [
         '',
         [
           Validators.required,
-          Validators.email,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+          // Validators.email,
+          // Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
         ],
       ],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
-  // login data submit
   onSubmit(): void {
-
+    console.log('Clicked')
+   this.loginAuthentication.login().subscribe(
+      (response) =>{
+        this.authResponse = response;
+        const email = this.loginForm.get('email')?.value;
+        const password = this.loginForm.get('password')?.value;
+        const user = response.find(
+          (userCredentials:any)=>{
+            return userCredentials.email ==  email && userCredentials.password == password
+          })
+      if(user){
+        alert('welcome to dashboard user');
+        this.loginForm.reset();
+      }
+      else{
+        alert("User not found")
+      }
+      }
+    )
   }
 
   get loginFormcontroller() {

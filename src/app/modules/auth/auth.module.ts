@@ -5,13 +5,20 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth.routing';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     SignInComponent,
     AuthComponent,
   ],
-  imports: [CommonModule,SharedModule,RouterModule,AuthRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    AuthRoutingModule,
+    HttpClientModule,
+  ],
   providers: [
   ]
 })
