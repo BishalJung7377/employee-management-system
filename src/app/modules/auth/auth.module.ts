@@ -6,11 +6,13 @@ import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     SignInComponent,
     AuthComponent,
+    SignUpComponent,
   ],
   imports: [
     CommonModule,
