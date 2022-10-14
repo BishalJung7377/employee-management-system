@@ -1,1 +1,268 @@
-<p>sign-up works!</p>
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form
+          [formGroup]="signupForm"
+          id="signupformvalidation"
+          #signUpForm="ngForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div
+            class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
+          >
+            <h1 class="form-title lead fw-normal mb-0 me-3 font-weight-bold">
+              {{ signupLabel }}
+            </h1>
+          </div>
+          <!-- Username input -->
+          <div class="username-field mt-4">
+            <label class="form-label" for="form3Example3">{{
+              usernameLabel
+            }}</label>
+            <div class="form-outline input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                ngModel
+                formControlName="username"
+                placeholder="Enter user name"
+                name="username"
+                id="validationCustom01"
+                (keypress)="textOnly($event)"
+                required
+              />
+            </div>
+            <div  *ngIf="
+            signupFormcontroller.username.invalid &&
+            signupFormcontroller.username.touched
+          ">
+              <mat-icon matSuffix style="color: red">error</mat-icon>
+              <a style="color: red">{{usernameerrorMsg}} </a>
+            </div>
+          </div>
+          <!-- phone number input -->
+          <div class="phone-field">
+            <label class="form-label" for="form3Example3">{{
+              phonenumberLabel
+            }}</label>
+            <div class="form-outline input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-phone"></i>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                ngModel
+                formControlName="phonenumber"
+                placeholder="Enter phone number"
+                name="phonenumber"
+                id="validationCustom01"
+                (keypress)="numberOnly($event)"
+                required
+              />
+            </div>
+            <div  *ngIf="
+            signupFormcontroller.phonenumber.invalid &&
+            signupFormcontroller.phonenumber.touched
+          ">
+              <mat-icon matSuffix style="color: red">error</mat-icon>
+              <a style="color: red">{{phoneerrorMsg}} </a>
+            </div>
+          </div>
+          <!-- Email input -->
+          <div class="email-field">
+            <label class="form-label" for="form3Example3">{{
+              emailLabel
+            }}</label>
+            <div class="form-outline input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fa fa-at" aria-hidden="true"></i>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                ngModel
+                formControlName="email"
+                placeholder="Enter Email"
+                name="email"
+                id="validationCustom01"
+                required
+              />
+              <div
+                class="tick"
+                *ngIf="signupFormcontroller.email.valid; else elseBlock"
+              >
+                <i class="fas fa-check" aria-hidden="true"></i>
+              </div>
+              <ng-template #elseBlock>
+                <!-- <div class="tickclose">
+                          <i class="fas fa-times" aria-hidden="true"></i>
+                      </div> -->
+              </ng-template>
+            </div>
+            <div  *ngIf="
+            signupFormcontroller.email.invalid &&
+            signupFormcontroller.email.touched
+          ">
+              <mat-icon matSuffix style="color: red">error</mat-icon>
+              <a style="color: red">{{emailerrorMsg}} </a>
+            </div>
+          </div>
+          <!-- Password input -->
+          <div class="password-field">
+            <label class="form-label mt-1" for="form3Example4">
+              {{ passwordLabel }}
+            </label>
+            <div class="form-outline input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+              <input
+                type="password"
+                matInput
+                [type]="hidenewPassword ? 'password' : 'text'"
+                ngModel
+                formControlName="newpassword"
+                placeholder="Enter Password"
+                name="newpassword"
+                minlength="8"
+                class="form-control form-control-lg"
+                required
+              />
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <mat-icon
+                    matSuffix
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidenewPassword"
+                    (click)="hidenewPassword = !hidenewPassword" 
+                    class="eye"
+                    >{{ hidenewPassword ? "visibility_off" : "visibility" }}</mat-icon
+                  >
+                </span>
+              </div>
+            </div>
+            <div
+              *ngIf="
+                newPasswords && newPasswords.invalid && newPasswords.touched
+              "
+            >
+              <div *ngIf="newPasswords.errors?.required">
+                <mat-icon matSuffix style="color: red">error</mat-icon>
+                <a style="color: red"> Password is required </a>
+              </div>
+              <div *ngIf="newPasswords.errors?.upperCasepassword">
+                <mat-icon matSuffix style="color: red">cancel</mat-icon>
+                <a style="color: red"> Uppercase is required</a>
+              </div>
+
+              <div *ngIf="newPasswords.errors?.specalCharacter">
+                <mat-icon matSuffix style="color: red">cancel</mat-icon>
+                <a style="color: red">Special character is required</a>
+              </div>
+              <div *ngIf="newPasswords.errors?.minlength">
+                <mat-icon matSuffix style="color: red">cancel</mat-icon>
+                <a style="color: red"
+                  >Password must be greater than 8 characters</a
+                >
+              </div>
+
+              <div *ngIf="newPasswords.errors?.numericPass">
+                <mat-icon matSuffix style="color: red">cancel</mat-icon>
+                <a style="color: red"> Number is required</a>
+              </div>
+            </div>
+          </div>
+          <!-- confirm Password input -->
+          <div class="confirm-password-field">
+            <label class="form-label mt-1" for="form3Example4">
+              {{ confirmpasswordLabel }}
+            </label>
+            <div class="form-outline input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+              <input
+                type="password"
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                ngModel
+                formControlName="cpassword"
+                placeholder="Confirm Password"
+                name="cpassword"
+                minlength="8"
+                class="form-control form-control-lg"
+                required
+              />
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <mat-icon
+                    matSuffix
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword"
+                    (click)="hidePassword = !hidePassword"
+                    class="eye"
+                    >{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon
+                  >
+                </span>
+              </div>
+            </div>
+            <div
+              *ngIf="
+                confirmPasswords &&
+                confirmPasswords.invalid &&
+                confirmPasswords.touched
+              "
+            >
+              <div *ngIf="confirmPasswords.errors?.required">
+                <mat-icon matSuffix style="color: red">error</mat-icon>
+                <a style="color: red"> Please Confirm Password </a>
+              </div>
+            </div>
+
+            <div *ngIf="signupForm.hasError('notSame')">
+              <mat-icon matSuffix style="color: red">cancel</mat-icon>
+              <a style="color: red"> Password do not match with new password </a>
+            </div>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              [disabled]="!signupForm.valid"
+              style="padding-left: 2.5rem; padding-right: 2.5rem"
+            >
+              Sign up
+            </button>
+            <p class="small fw-bold mt-2 pt-1 mb-3">
+              {{ alreadyAccount }}
+              <a routerLink="/auth/sign-in" class="link-danger">{{ login }}</a>
+            </p>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img
+          src="../../../../../assets/signin-image.jpg"
+          class="img-fluid ml-4"
+          alt="Sample image"
+        />
+      </div>
+    </div>
+  </div>
+</section>

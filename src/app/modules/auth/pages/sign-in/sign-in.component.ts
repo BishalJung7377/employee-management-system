@@ -56,10 +56,10 @@ export class SignInComponent implements OnInit {
       (response) =>{
         this.authResponse = response;
         const email = this.loginForm.get('email')?.value;
-        const password = this.loginForm.get('password')?.value;
+        const cpassword = this.loginForm.get('password')?.value;
         const user = response.find(
           (userCredentials:any)=>{
-            return userCredentials.email ==  email && userCredentials.password == password
+            return userCredentials.email ==  email && userCredentials.cpassword == cpassword
           })
       if(user){
         alert('welcome to dashboard user');
