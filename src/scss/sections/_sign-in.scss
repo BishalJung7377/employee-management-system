@@ -1,0 +1,21 @@
+@import "../custom";
+@import "../components/variables";
+
+.emailerror {
+    color: $errorColor;
+}
+.passworderror {
+    color: $errorColor;
+}
+
+.email-input i{
+    padding: 8px 16px;
+    color: #0cd6a8;
+}
+.mateye {
+    position: $positionAbsolute;
+    left: $zeroValue;
+    color: #aaa;
+    transition: $transition;
+    margin-top: 0.8em;
+}

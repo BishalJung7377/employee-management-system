@@ -1,1 +1,16 @@
 @import "./custom";
+
+//importing component sections
+@import "./components/button";
+@import "./components/mixins";
+@import "./components/typography";
+@import "./components/animation";
+@import "./components/variables";
+//importing sections 
+@import "./sections/sign-in";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
