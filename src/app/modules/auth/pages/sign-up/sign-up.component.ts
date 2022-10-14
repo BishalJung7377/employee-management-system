@@ -79,16 +79,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
-   
     if(this.signupForm.valid){
       this.authentication.signup(this.signupForm.value).subscribe(
         (response) =>{
-          alert("User Created")
+          window.location.href = '';
         }
       )
     }
   else{
-    alert("Invalid Form")
+    alert("User not created")
   }
   }
 
