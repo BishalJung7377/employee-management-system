@@ -29,7 +29,6 @@ export class SignInComponent implements OnInit {
     public loginAuthentication: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private injector: Injector
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +61,12 @@ export class SignInComponent implements OnInit {
             return userCredentials.email ==  email && userCredentials.cpassword == cpassword
           })
       if(user){
-        alert('welcome to dashboard user');
-        this.loginForm.reset();
+        console.log('welcome to dashboard user');
+        localStorage.setItem('token', user.username);
+        setTimeout(this.dashboardRoute.bind(this));
       }
       else{
-        alert("User not found")
+       setTimeout(this.noLoginMessage.bind(this));
       }
       }
     )
@@ -74,5 +74,13 @@ export class SignInComponent implements OnInit {
 
   get loginFormcontroller() {
     return this.loginForm.controls;
+  }
+
+  dashboardRoute(): void {
+    this.router.navigate(["/dashboard"])
+  }
+
+  noLoginMessage(): void {
+    alert("Unable to login")
   }
 }

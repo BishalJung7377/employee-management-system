@@ -98,17 +98,6 @@
                 id="validationCustom01"
                 required
               />
-              <div
-                class="tick"
-                *ngIf="signupFormcontroller.email.valid; else elseBlock"
-              >
-                <i class="fas fa-check" aria-hidden="true"></i>
-              </div>
-              <ng-template #elseBlock>
-                <!-- <div class="tickclose">
-                          <i class="fas fa-times" aria-hidden="true"></i>
-                      </div> -->
-              </ng-template>
             </div>
             <div  *ngIf="
             signupFormcontroller.email.invalid &&

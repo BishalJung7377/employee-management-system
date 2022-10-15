@@ -1,3 +1,20 @@
 @import "../custom";
 @import "../components/mixins";
 @import "../components/variables";
+@import "../custom";
+@import "../components/mixins";
+@import "../components/variables";
+
+.nav-button {
+    border: 1px solid white;
+    background: rgba(251, 220, 211, 0.25);
+    text-align: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    display: inline-block;
+    font-size: 1.1rem;
+    vertical-align: middle;
+    color: $cadet-blue;
+    text-decoration: none
+}

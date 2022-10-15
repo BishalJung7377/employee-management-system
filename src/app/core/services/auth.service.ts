@@ -8,11 +8,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  userData: any;
+  public userData: any;
+
   constructor(
     private http: HttpClient,
     private injector: Injector
     ) { }
+
+    isUserLoggedIn(){
+      return !!localStorage.getItem('token');
+    }
 
   signup(data: newUsers) {
     const url = environment.apiURL + 'signup'

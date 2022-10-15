@@ -1,0 +1,12 @@
+@import "../custom";
+@import "../components/variables";
+.menu {
+    li {
+        padding: 0.5em 1em 0em 1.2em;
+    }
+    a {
+        color: $black;
+        text-transform: capitalize;
+        font-weight: 600;
+    }
+}
