@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { newUsers } from './../../../../core/models/user.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, Injector } from '@angular/core';
@@ -18,33 +19,34 @@ import {
 export class SignUpComponent implements OnInit {
   public signupForm!: FormGroup;
   public authResponse: any;
-  public hide : boolean = true;
-  public usernameLabel : string = 'User Name';
-  public phonenumberLabel : string = 'Phone number'
-  public emailLabel : string = 'Email';
-  public passwordLabel : string = 'Password';
-  public confirmpasswordLabel : string = 'Confirm Password';
-  public signupLabel : string = "Sign Up Here";
-  public remembermeLabel : string = "Remember me";
-  public emailerrorMsg : string = 'Email is required*';
-  public usernameerrorMsg : string = 'Username is required*';
-  public phoneerrorMsg : string = 'Phone number is required*';
-  public passworderrorMsg : string = 'Password is required*';
-  public forgetPassword : string = 'Forgot Password?';
-  public alreadyAccount : string = "Already have a account?";
-  public login : string = 'Login';
+  public hide: boolean = true;
+  public usernameLabel: string = 'User Name';
+  public phonenumberLabel: string = 'Phone number'
+  public emailLabel: string = 'Email';
+  public passwordLabel: string = 'Password';
+  public confirmpasswordLabel: string = 'Confirm Password';
+  public signupLabel: string = "Sign Up Here";
+  public remembermeLabel: string = "Remember me";
+  public emailerrorMsg: string = 'Email is required*';
+  public usernameerrorMsg: string = 'Username is required*';
+  public phoneerrorMsg: string = 'Phone number is required*';
+  public passworderrorMsg: string = 'Password is required*';
+  public forgetPassword: string = 'Forgot Password?';
+  public alreadyAccount: string = "Already have a account?";
+  public login: string = 'Login';
   public email!: string;
   public newPassword!: string;
   public confirmPassword!: string;
-  public submitted : boolean = false;
-  public valid : boolean = false;
-  public hidenewPassword : boolean = true;
-  public hidePassword : boolean = true;
-  
+  public submitted: boolean = false;
+  public valid: boolean = false;
+  public hidenewPassword: boolean = true;
+  public hidePassword: boolean = true;
+
   constructor(
     public authentication: AuthService,
     private formBuilder: FormBuilder,
-  ) {}
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
     this.initialize();
@@ -62,33 +64,35 @@ export class SignUpComponent implements OnInit {
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
         ],
       ],
-        newpassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            passwordUppercase(),
-            specialeChars(),
-            numericPass(),
-          ],
+      newpassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          passwordUppercase(),
+          specialeChars(),
+          numericPass(),
         ],
-        cpassword: ['', [Validators.required]],
+      ],
+      cpassword: ['', [Validators.required]],
     },
-    { validators: validateConfirmpassword() }
+      { validators: validateConfirmpassword() }
     );
   }
 
   onSubmit(): void {
-    if(this.signupForm.valid){
+    if (this.signupForm.valid) {
       this.authentication.signup(this.signupForm.value).subscribe(
-        (response) =>{
+        (response) => {
+          this.signupForm.reset();
           window.location.href = '';
+          this.toastr.success('Signed up is Successfull', 'Signed Up', {});
         }
       )
     }
-  else{
-    alert("User not created")
-  }
+    else {
+      this.toastr.error('Unable to Signed up is Successfull', 'Signed Up Error', {});
+    }
   }
 
   get signupFormcontroller() {
@@ -110,8 +114,9 @@ export class SignUpComponent implements OnInit {
   }
 
   textOnly(event: { key: string }): boolean {
-    let textPattern =/^[A-Za-z\s]*$/;
+    let textPattern = /^[A-Za-z\s]*$/;
     let res = textPattern.test(event.key);
     return res;
   }
+
 }

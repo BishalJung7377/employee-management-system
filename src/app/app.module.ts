@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DecimalPipe} from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthModule,
     BrowserAnimationsModule,
     NgbModule,
+    SharedModule,
+    
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

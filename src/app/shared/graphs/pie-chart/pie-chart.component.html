@@ -1,4 +1,18 @@
-<div>
+<div *ngIf="pieData.length>0; else elseBlock">
     <canvas #pieCanvas style="height:20vh; width:40vw"></canvas>
     <hr color="red">
 </div>
+<ng-template #elseBlock>
+    <div class="msc-blank">
+        <div class="msc-blank-icon">⚠</div>
+        <div class="nodata mt-4">
+            <div class="msc-blank-title mt-4">
+                No records have been added yet
+              </div>
+              <div class="msc-blank-desc">
+                This information needs to be added by your manager
+              </div>
+        </div>
+      
+      </div>
+</ng-template>

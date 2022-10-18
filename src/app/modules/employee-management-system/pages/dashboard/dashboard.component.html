@@ -1,2 +1,8 @@
-<app-navigation-bar></app-navigation-bar>
-<app-dashboard-content></app-dashboard-content>
+<div class="dashboard-contents">
+  <div class="loader" *ngIf="loaderService.isLoading | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <app-navigation-bar></app-navigation-bar>
+  <app-dashboard-content></app-dashboard-content>
+  <app-user-table></app-user-table>
+</div>

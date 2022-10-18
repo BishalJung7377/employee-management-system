@@ -1,3 +1,5 @@
+import { HhtpHandlerService } from 'src/app/core/services/hhtp-handler.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChartService } from 'src/app/core/services/chart.service';
 import { AfterViewInit, Component, EventEmitter,ChangeDetectorRef, Output, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
@@ -11,22 +13,27 @@ export class PieChartComponent implements AfterViewInit {
   @ViewChild('pieCanvas') pieCanvas!: { nativeElement: any };
   @Output() public workingHours = new EventEmitter<string>();
 
-  canvas: any;
-  ctx: any;
+  public canvas: any;
+  public ctx: any;
   public pieChart: any;
   public pieData: any;
   public pieLabel: string[] = [];
   public pieWorkhours: string[] = [];
   public nameData: string[] = [];
   public averageHours : number = 0;
+  public isLoading : boolean = false;
   constructor(
     private chartDatas: ChartService,
-    private cdRef: ChangeDetectorRef   
+    private cdRef: ChangeDetectorRef ,
+    private route : ActivatedRoute,
+    public router: Router,  
+    public loaderService: HhtpHandlerService,
   ) {
     Chart.register(...registerables)
   }
 
-  ngOnInit() {
+  ngOnInit() : void  {
+    this.isLoading = true;
     this.chartDatas.getPieChartData()
       .subscribe(
         res => {
@@ -41,12 +48,12 @@ export class PieChartComponent implements AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.renderPieChart(this.pieLabel, this.pieWorkhours);
+    this.cdRef.detectChanges();
   }
 
   renderPieChart(pieLabel: string[], pieWorkhours: string[]): void {
     this.canvas = this.pieCanvas.nativeElement;
     this.ctx = this.canvas.getContext('2d');
-
     this.pieChart = new Chart(this.ctx, {
       type: 'pie',
       data: {
@@ -71,6 +78,6 @@ export class PieChartComponent implements AfterViewInit {
       sum += parseInt(this.pieWorkhours[i], this.pieWorkhours[i].length);
     }
     this.averageHours = sum /this.pieWorkhours.length;
-    this.workingHours.emit(`${this.averageHours.toFixed(0)}hrs`);
+    this.workingHours.emit(`${this.averageHours.toFixed(0)} Hours`);
   }
 }

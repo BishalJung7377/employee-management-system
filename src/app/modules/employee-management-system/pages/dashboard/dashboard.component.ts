@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HhtpHandlerService } from 'src/app/core/services/hhtp-handler.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public loaderService : HhtpHandlerService,
+  ) { }
 
   ngOnInit(): void {
   }

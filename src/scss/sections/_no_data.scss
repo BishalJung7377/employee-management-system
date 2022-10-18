@@ -1,0 +1,54 @@
+@import "../custom";
+@import "../components/variables";
+
+.msc-blank  {
+  text-align: $textcontentitemalign;
+  &-icon {
+    color: $gray-color;
+    font-size: 4rem;
+  }
+  &-title {
+    font-size: 1.6rem;
+  }
+  &-desc {
+    font-size: $oneRem;
+    color: $gray-color;
+  }
+}
+
+.card-hover {
+    display: $display-block ;
+    top: $zeroValue;
+    position: $positionRelative;
+    background-color: $light-white;
+    text-decoration: $bordernon;
+    z-index: $zeroValue;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover {
+      transition: all $transition ease-out;
+      box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+      top: -4px;
+      border: 1px solid $creame-white;
+      background-color: $whiteStroke;
+    }
+  
+    &:before {
+      content: "";
+      position: $positionAbsolute;
+      z-index: -1;
+      top: $negSixtenPx;
+      right:$negSixtenPx;
+      background: $light-green;
+      height: $thirtytwo-pixel;
+      width: $thirtytwo-pixel;
+      border-radius: $thirtytwo-pixel;
+      transform: scale(2);
+      transform-origin: 50% 50%;
+      transition: transform 0.15s ease-out;
+    }
+  
+    &:hover:before {
+      transform: scale(2.15);
+    }
+  }

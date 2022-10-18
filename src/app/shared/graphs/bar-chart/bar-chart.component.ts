@@ -9,16 +9,21 @@ import { ChartService } from 'src/app/core/services/chart.service';
 })
 export class BarChartComponent implements OnInit {
   @Output() public salaryEvent = new EventEmitter<string>();
+  @Output() public employeeEvent = new EventEmitter<string>();
+
   public chartData: any;
   public labelData: string[] = [];
   public realData: string[] = [];
   public nameData: string[] = [];
   public avgemployeSalary: number = 0;
+  public totalEmployee: number = 0;
+  public isLoading : boolean = false;
   constructor(
     private chartDatas: ChartService
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.chartDatas.getChartInfo()
       .subscribe(
         res => {
@@ -29,6 +34,7 @@ export class BarChartComponent implements OnInit {
               this.realData.push(this.chartData[i].salary);
               this.nameData.push(this.chartData[i].name);
             }
+            this.employeeEvent.emit(this.chartData.length);
           }
           this.renderChart(this.labelData, this.realData, this.nameData);
         }
@@ -74,7 +80,9 @@ export class BarChartComponent implements OnInit {
     for (var i = 0; i < realData.length; i++) {
       sum += parseInt(realData[i], realData[i].length);
     }
+    console.log(realData);
+    
     this.avgemployeSalary = sum / realData.length;
-    this.salaryEvent.emit(`${this.avgemployeSalary.toFixed(2)}k`);
+    this.salaryEvent.emit(`${this.avgemployeSalary.toFixed(2)}`);
   }
 }

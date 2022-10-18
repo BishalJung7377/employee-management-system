@@ -8,9 +8,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class DashboardContentComponent implements OnInit {
 
-  public averageSalary : string = '';
-  public averageWorkinghours : string = '';
+  public averageSalary : string = '0';
+  public averageWorkinghours : string = '0';
   public totalUsers : number = 0;
+  public totalEmployee : string = "0";
   constructor(
     private authData : AuthService,
   ) { }
@@ -19,18 +20,24 @@ export class DashboardContentComponent implements OnInit {
     this.getUserCount();
   }
 
-  salaryEventHander($event: string){
+  salaryEventHander($event: string): void{
     this.averageSalary = $event; 
   }
-  workHrsEventHander($event : string){
+
+  workHrsEventHander($event : string): void{
    this.averageWorkinghours = $event; 
   }
 
-  getUserCount(){
+  employeeEventHandler($event : string): void{
+    this.totalEmployee = $event;
+  }
+
+  getUserCount(): void{
     this.authData.login().subscribe(
       res => {
        this.totalUsers = res.length;
       }
     )
   }
+
 }
