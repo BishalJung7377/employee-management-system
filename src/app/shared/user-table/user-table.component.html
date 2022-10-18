@@ -1,0 +1,474 @@
+<div class="d-flex flex-column flex-lg-row h-lg-full mt-4 container">
+  <!-- Main content -->
+  <div class="h-screen flex-grow-1 overflow-y-lg-auto container mt-4">
+    <main class="py-6">
+      <div class="container-fluid">
+        <div class="mt-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <!-- Grid row -->
+              <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-12 mb-4">
+                  <div class="input-group md-form form-sm form-2 pl-0">
+                    <input
+                      class="form-control my-0 py-1 pl-3"
+                      type="text"
+                      placeholder="Search something here..."
+                      aria-label="Search"
+                      name="firstName"
+                      [(ngModel)]="name"
+                      (ngModelChange)="Search()"
+                    />
+                  </div>
+                </div>
+                <!-- Grid column -->
+              </div>
+              <!-- Grid row -->
+              <!--Table-->
+              <div class="table-contents" *ngIf="users.length>0; else elseBlock">
+                <table class="table table-striped">
+                    <!--Table head-->
+                    <thead>
+                      <tr>
+                        <th (click)="sort('users.id')">
+                          User ID&nbsp;<i class="fa fa-sort"></i>
+                        </th>
+                        <th (click)="sort('users.name')">
+                          Name&nbsp;<i class="fa fa-sort"></i>
+                        </th>
+                        <th>Salary</th>
+                        <th>Age</th>
+                        <th>Phone</th>
+                        <th>Intrest</th>
+                        <th>Field</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <!--Table head-->
+                    <!--Table body-->
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let item of users
+                            | orderBy: key:reverse
+                            | paginate: { itemsPerPage: 5, currentPage: p }
+                        "
+                      >
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.salary | currency:'USD' }} k</td>
+                        <td>{{ item.year }} years</td>
+                        <td>{{ item.phone }} </td>
+                        <td>{{ item.intrest }} </td>
+                        <td>{{ item.field }} </td>
+                        <td>
+                          <a (click)="open(content)">
+                            <a
+                              class="edit"
+                              title="Edit"
+                              (click)="getEmployeeInfo(item)"
+                              data-toggle="tooltip"
+                              ><i class="material-icons text-success" 
+                                >&#xE254; &nbsp;</i
+                              ></a
+                            >
+                          </a>
+                          <a
+                            class="delete"
+                            (click)="deleteUser(item)"
+                            title="Delete"
+                            data-toggle="tooltip"
+                            ><i class="material-icons text-danger"
+                              >&#xE872;</i
+                            ></a
+                          >
+                        </td>
+                      </tr>
+    
+                      <ng-template #elseBlock>
+                        <td>No Data Found</td>
+                      </ng-template>
+                    </tbody>
+                    <!--Table body-->
+                  </table>
+                  <!--Table-->
+                  <div class="d-flex justify-content-between">
+                    <div class="mt-2" style="margin-left: -3em;">
+                      <pagination-controls
+                        (pageChange)="p = $event"
+                      ></pagination-controls>
+                    </div>
+                    <div class="p-2">
+                      <button type="button" (click)="addNewUser(testContent)" class="btn btn-success">
+                        Add New User
+                      </button>
+                    </div>
+                  </div>
+              </div>
+              <ng-template #elseBlock>
+                <div class="msc-blank mt-4">
+                    <div class="msc-blank-icon">⚠</div>
+                    <div class="nodata mt-4">
+                        <div class="msc-blank-title mt-4">
+                            No Data Found
+                          </div>
+                    </div>
+                  </div>
+            </ng-template>
+
+            </div>
+          </div>
+          <hr class="my-4" />
+
+          <ng-template #content let-modal>
+            <section class="update-user">
+              <div class="loader-container" *ngIf="loaderService.isLoading | async" >
+                <mat-spinner style="top: 50%; left: 40%" color="accent" diameter="50" mode="indeterminate" value="100"></mat-spinner>
+            </div>
+              <div class="container">
+                <div class="modal-header">
+                  <h2 class="modal-title mb-0" id="modal-title">
+                    Edit User Info
+                  </h2>
+                  <button
+                    type="button"
+                    (click)="modal.dismiss('Cross click')"
+                    class="close"
+                    aria-describedby="modal-title"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="wrapper text-start justify-content-start">
+                    <div class="row">
+                      <form #taskform="ngForm" #userInfo="ngForm" [formGroup]="getUserInformation">
+                        <div class="form-group" >
+                          <div class="user-info">
+                            <label for="createlIst">User name</label>
+                            <input
+                              type="text"
+                              (keypress)="textOnly($event)"
+                              class="form-control form-control-lg"
+                              name="name"
+                              size="40"
+                              formControlName="name"
+                              name="name"
+                              placeholder="Enter name Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.name.invalid &&
+                            updateFormController.name.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Name is required </a>
+                            </div>
+                          </div>
+                          <div class="row mt-4">
+                            <div class="col">
+                              <label for="formGroupExampleInput"
+                                >Employee Salary</label
+                              >
+                              <input
+                                type="text"
+                                (keypress)="numberOnly($event)"
+                                class="form-control form-control-lg"
+                                name="salary"
+                                formControlName="salary"
+                                name="salary"
+                                placeholder="Enter salary Here"
+                                required
+                              />
+                              <div *ngIf="
+                              updateFormController.salary.invalid &&
+                              updateFormController.salary.touched
+                            ">
+                                <mat-icon matSuffix class="text-danger">error</mat-icon>
+                                <a class="text-danger">Salary is required </a>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <label for="formGroupExampleInput"
+                                >Employee Age</label
+                              >
+                              <input
+                                type="number"
+                                (keypress)="numberOnly($event)"
+                                class="form-control form-control-lg"
+                                name="year"
+                                placeholder="Enter age Here"
+                                formControlName="year"
+                                name="year"
+                                min="18" max="65"
+                                required
+                              />
+                              <div  *ngIf="
+                              updateFormController.year.invalid &&
+                              updateFormController.year.touched
+                            ">
+                                <mat-icon matSuffix class="text-danger">error</mat-icon>
+                                <a class="text-danger">Age is required and must be between 18 and 65</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee Phone number</label>
+                            <input
+                              type="text"
+                              (keypress)="numberOnly($event)"
+                              class="form-control form-control-lg"
+                              name="phone"
+                              size="40"
+                              formControlName="phone"
+                              name="phone"
+                              placeholder="Enter phone number Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.phone.invalid &&
+                            updateFormController.phone.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Phone number is required </a>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee Intrest</label>
+                            <input
+                              type="intrest"
+                              (keypress)="textOnly($event)"
+                              class="form-control form-control-lg"
+                              name="intrest"
+                              size="40"
+                              formControlName="intrest"
+                              name="intrest"
+                              placeholder="Enter your intrest Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.intrest.invalid &&
+                            updateFormController.intrest.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee intrest is required </a>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee field</label>
+                            <input
+                              type="text"
+                              (keypress)="textOnly($event)"
+                              class="form-control form-control-lg"
+                              name="field"
+                              size="40"
+                              formControlName="field"
+                              name="field"
+                              placeholder="Enter your working field Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.field.invalid &&
+                            updateFormController.field.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee field is required </a>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                  [disabled]="!getUserInformation.valid"
+                  type="button" (click)="updateUser()"   (click)="modal.dismiss('Cross click')" class="btn btn-danger">Save</button>
+                </div>
+              </div>
+            </section>
+          </ng-template>
+          
+          <ng-template #testContent let-modal>
+            <section class="addusermodal">
+              <div class="loader-container" *ngIf="loaderService.isLoading | async" >
+                <mat-spinner style="top: 50%; left: 40%" color="accent" diameter="50" mode="indeterminate" value="100"></mat-spinner>
+            </div>
+              <div class="container">
+                <div class="modal-header">
+                  <h2 class="modal-title mb-0" id="modal-title">
+                  Add new user
+                  </h2>
+                  <button
+                    type="button"
+                    (click)="modal.dismiss('Cross click')"
+                    class="close"
+                    aria-describedby="modal-title"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="wrapper text-start justify-content-start">
+                    <div class="row">
+                      <form #taskform="ngForm" #userInfo="ngForm" [formGroup]="getUserInformation">
+                        <div class="form-group" >
+                          <div class="user-info">
+                          <label for="createlIst">User name</label>
+                          <input
+                            type="text"
+                            (keypress)="textOnly($event)"
+                            class="form-control form-control-lg"
+                            name="name"
+                            size="40"
+                            formControlName="name"
+                            name="name"
+                            placeholder="Enter name Here"
+                            required
+                          />
+                          <div  *ngIf="
+                          updateFormController.name.invalid &&
+                          updateFormController.name.touched
+                        ">
+                            <mat-icon matSuffix class="text-danger">error</mat-icon>
+                            <a class="text-danger">Name is required </a>
+                          </div>
+                          </div>
+                          <div class="row mt-4">
+                            <div class="col">
+                              <label for="formGroupExampleInput"
+                                >Employee Salary</label
+                              >
+                              <input
+                                type="text"
+                                (keypress)="numberOnly($event)"
+                                class="form-control form-control-lg"
+                                name="salary"
+                                formControlName="salary"
+                                name="salary"
+                                placeholder="Enter salary Here"
+                                required
+                              />
+                              <div *ngIf="
+                              updateFormController.salary.invalid &&
+                              updateFormController.salary.touched
+                            ">
+                                <mat-icon matSuffix class="text-danger">error</mat-icon>
+                                <a class="text-danger">Salary is required </a>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <label for="formGroupExampleInput"
+                                >Employee Age</label
+                              >
+                              <input
+                                type="number"
+                                (keypress)="numberOnly($event)"
+                                class="form-control form-control-lg"
+                                name="year"
+                                placeholder="Enter age Here"
+                                formControlName="year"
+                                name="year"
+                                min="18" max="65" 
+                                required
+                              />
+                              <div  *ngIf="
+                              updateFormController.year.invalid &&
+                              updateFormController.year.touched
+                            ">
+                                <mat-icon matSuffix class="text-danger">error</mat-icon>
+                                <a class="text-danger">Age is required and must be between 18 and 65</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee Phone number</label>
+                            <input
+                              type="text"
+                              (keypress)="numberOnly($event)"
+                              class="form-control form-control-lg"
+                              name="phone"
+                              size="40"
+                              formControlName="phone"
+                              name="phone"
+                              placeholder="Enter phone number Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.phone.invalid &&
+                            updateFormController.phone.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Phone number is required </a>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee Intrest</label>
+                            <input
+                              type="intrest"
+                              (keypress)="textOnly($event)"
+                              class="form-control form-control-lg"
+                              name="intrest"
+                              size="40"
+                              formControlName="intrest"
+                              name="intrest"
+                              placeholder="Enter your intrest Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.intrest.invalid &&
+                            updateFormController.intrest.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee intrest is required </a>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee field</label>
+                            <input
+                              type="text"
+                              (keypress)="textOnly($event)"
+                              class="form-control form-control-lg"
+                              name="field"
+                              size="40"
+                              formControlName="field"
+                              name="field"
+                              placeholder="Enter your working field Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.field.invalid &&
+                            updateFormController.field.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee field is required </a>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                  [disabled]="!getUserInformation.valid"
+                  type="button" (click)="addNewEmployee()"   (click)="modal.dismiss('Cross click')" class="btn btn-danger">Save</button>
+                </div>
+              </div>
+            </section>
+          </ng-template>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
