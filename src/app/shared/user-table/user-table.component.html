@@ -26,23 +26,23 @@
               </div>
               <!-- Grid row -->
               <!--Table-->
-              <div class="table-contents" *ngIf="users.length>0; else elseBlock">
-                <table class="table table-striped">
+              <div class="table-contents container table-responsive py-5" *ngIf="users.length>0; else elseBlock">
+                <table class="table table-striped table-bordered table-hover">
                     <!--Table head-->
-                    <thead>
+                    <thead class="thead-dark">
                       <tr>
-                        <th (click)="sort('users.id')">
+                        <th scope="col" (click)="sort('users.id')">
                           User ID&nbsp;<i class="fa fa-sort"></i>
                         </th>
-                        <th (click)="sort('users.name')">
+                        <th scope="col" (click)="sort('users.name')">
                           Name&nbsp;<i class="fa fa-sort"></i>
                         </th>
-                        <th>Salary</th>
-                        <th>Age</th>
-                        <th>Phone</th>
-                        <th>Intrest</th>
-                        <th>Field</th>
-                        <th>Action</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Intrest</th>
+                        <th scope="col">Field</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <!--Table head-->
@@ -55,7 +55,7 @@
                             | paginate: { itemsPerPage: 5, currentPage: p }
                         "
                       >
-                        <td>{{ item.id }}</td>
+                        <td scope="row">{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.salary | currency:'USD' }} k</td>
                         <td>{{ item.year }} years</td>
