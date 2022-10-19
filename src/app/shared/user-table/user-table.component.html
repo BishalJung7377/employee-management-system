@@ -142,7 +142,7 @@
           <ng-template #content let-modal>
             <section class="update-user">
               <div class="loader-container" *ngIf="loaderService.isLoading | async" >
-                <mat-spinner style="top: 50%; left: 40%" color="accent" diameter="50" mode="indeterminate" value="100"></mat-spinner>
+                <mat-spinner style="top: 50%; left: 45%" color="accent" diameter="50" mode="indeterminate" value="100"></mat-spinner>
             </div>
               <div class="container">
                 <div class="modal-header">
@@ -179,8 +179,9 @@
                             <div 
                             *ngIf="updateFormController.name.invalid &&
                             updateFormController.name.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Name is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Name is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="row mt-4">
@@ -202,8 +203,9 @@
                               updateFormController.salary.invalid &&
                               updateFormController.salary.touched
                             ">
-                                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                                <a class="text-danger">Salary is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Salary is required* </a>
+                            </i>
                               </div>
                             </div>
                             <div class="col">
@@ -225,8 +227,9 @@
                               updateFormController.year.invalid &&
                               updateFormController.year.touched
                             ">
-                                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                                <a class="text-danger">Age is required and must be between 18 and 65</a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Age is required* and must be between 18 and 65</a>
+                            </i>
                               </div>
                             </div>
                           </div>
@@ -246,8 +249,9 @@
                             <div 
                             *ngIf="updateFormController.phone.invalid &&
                             updateFormController.phone.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Phone number is required </a>
+                               <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Phone number is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -266,8 +270,9 @@
                             <div 
                             *ngIf="updateFormController.intrest.invalid &&
                             updateFormController.intrest.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee intrest is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee Intrest is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -286,8 +291,9 @@
                             <div 
                             *ngIf="updateFormController.field.invalid &&
                             updateFormController.field.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee field is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee field is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -305,8 +311,9 @@
                             <div 
                             *ngIf="updateFormController.hours.invalid &&
                             updateFormController.hours.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee working hours is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee working hours is required* </a>
+                            </i>
                             </div>
                           </div>
                         </div>
@@ -372,8 +379,9 @@
                           updateFormController.name.invalid &&
                           updateFormController.name.touched
                         ">
-                            <mat-icon matSuffix class="text-danger">error</mat-icon>
-                            <a class="text-danger">Name is required </a>
+                        <i class="fas fa-exclamation-circle text-danger"> 
+                          &nbsp;<a class="text-danger"  style="font-family: Roboto">Name is required* </a>
+                        </i>
                           </div>
                           </div>
                           <div class="row mt-4">
@@ -395,8 +403,9 @@
                               updateFormController.salary.invalid &&
                               updateFormController.salary.touched
                             ">
-                                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                                <a class="text-danger">Salary is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Salary is required* </a>
+                            </i>
                               </div>
                             </div>
                             <div class="col">
@@ -418,8 +427,9 @@
                               updateFormController.year.invalid &&
                               updateFormController.year.touched
                             ">
-                                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                                <a class="text-danger">Age is required and must be between 18 and 65</a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Age is required* and must be between 18 and 65</a>
+                            </i>
                               </div>
                             </div>
                           </div>
@@ -439,8 +449,9 @@
                             <div 
                             *ngIf="updateFormController.phone.invalid &&
                             updateFormController.phone.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Phone number is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Phone number is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -459,8 +470,9 @@
                             <div 
                             *ngIf="updateFormController.intrest.invalid &&
                             updateFormController.intrest.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee intrest is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Emplopyee intrest is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -479,8 +491,9 @@
                             <div 
                             *ngIf="updateFormController.field.invalid &&
                             updateFormController.field.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee field is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee field is required* </a>
+                            </i>
                             </div>
                           </div>
                           <div class="user-info mt-4">
@@ -499,8 +512,9 @@
                             <div 
                             *ngIf="updateFormController.hours.invalid &&
                             updateFormController.hours.touched">
-                              <mat-icon matSuffix class="text-danger">error</mat-icon>
-                              <a class="text-danger">Employee working hours is required </a>
+                            <i class="fas fa-exclamation-circle text-danger"> 
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee working hours is required* </a>
+                            </i>
                             </div>
                           </div>
                         </div>

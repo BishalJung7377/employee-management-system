@@ -42,8 +42,9 @@
             signupFormcontroller.username.invalid &&
             signupFormcontroller.username.touched
           ">
-              <mat-icon matSuffix class="text-danger">error</mat-icon>
-              <a class="text-danger">{{usernameerrorMsg}} </a>
+          <i class="fas fa-exclamation-circle text-danger"> 
+            &nbsp;<a class="text-danger"  style="font-family: Roboto">{{usernameerrorMsg}} </a>
+          </i>
             </div>
           </div>
           <!-- phone number input -->
@@ -73,8 +74,9 @@
             signupFormcontroller.phonenumber.invalid &&
             signupFormcontroller.phonenumber.touched
           ">
-              <mat-icon matSuffix class="text-danger">error</mat-icon>
-              <a class="text-danger">{{phoneerrorMsg}} </a>
+          <i class="fas fa-exclamation-circle text-danger"> 
+            &nbsp;<a class="text-danger"  style="font-family: Roboto">{{phoneerrorMsg}} </a>
+          </i>
             </div>
           </div>
           <!-- Email input -->
@@ -103,8 +105,9 @@
             signupFormcontroller.email.invalid &&
             signupFormcontroller.email.touched
           ">
-              <mat-icon matSuffix class="text-danger">error</mat-icon>
-              <a class="text-danger">{{emailerrorMsg}} </a>
+          <i class="fas fa-exclamation-circle text-danger"> 
+            &nbsp;<a class="text-danger"  style="font-family: Roboto">{{emailerrorMsg}} </a>
+          </i>
             </div>
           </div>
           <!-- Password input -->
@@ -120,7 +123,6 @@
               </div>
               <input
                 type="password"
-                matInput
                 [type]="hidenewPassword ? 'password' : 'text'"
                 ngModel
                 formControlName="newpassword"
@@ -149,28 +151,32 @@
               "
             >
               <div *ngIf="newPasswords.errors?.required">
-                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                <a class="text-danger"> Password is required </a>
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto">Password is required*</a>
+                </i>
+
               </div>
               <div *ngIf="newPasswords.errors?.upperCasepassword">
-                <mat-icon matSuffix class="text-danger">cancel</mat-icon>
-                <a class="text-danger"> Uppercase is required</a>
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto">Uppercase is required*</a>
+                </i>
               </div>
 
               <div *ngIf="newPasswords.errors?.specalCharacter">
-                <mat-icon matSuffix class="text-danger">cancel</mat-icon>
-                <a class="text-danger">Special character is required</a>
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto"> Special character is required*</a>
+                </i>
               </div>
               <div *ngIf="newPasswords.errors?.minlength">
-                <mat-icon matSuffix class="text-danger">cancel</mat-icon>
-                <a class="text-danger"
-                  >Password must be greater than 8 characters</a
-                >
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto">Password must be greater than 8 characters</a>
+                </i>
               </div>
 
               <div *ngIf="newPasswords.errors?.numericPass">
-                <mat-icon matSuffix class="text-danger">cancel</mat-icon>
-                <a class="text-danger"> Number is required</a>
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto">Number is required*</a>
+                </i>
               </div>
             </div>
           </div>
@@ -187,7 +193,6 @@
               </div>
               <input
                 type="password"
-                matInput
                 [type]="hidePassword ? 'password' : 'text'"
                 ngModel
                 formControlName="cpassword"
@@ -218,14 +223,16 @@
               "
             >
               <div *ngIf="confirmPasswords.errors?.required">
-                <mat-icon matSuffix class="text-danger">error</mat-icon>
-                <a class="text-danger"> Please Confirm Password </a>
+                <i class="fa fa-times-circle text-danger"> 
+                  &nbsp;<a class="text-danger"  style="font-family: Roboto">Please confirm password</a>
+                </i>
               </div>
             </div>
 
             <div *ngIf="signupForm.hasError('notSame')">
-              <mat-icon matSuffix class="text-danger">cancel</mat-icon>
-              <a class="text-danger"> Password do not match with password </a>
+              <i class="fa fa-times-circle text-danger"> 
+                &nbsp;<a class="text-danger"  style="font-family: Roboto">Password do not matched</a>
+              </i>
             </div>
           </div>
 

@@ -51,8 +51,9 @@
             <div  
             *ngIf="loginFormcontroller.email.invalid &&
             loginFormcontroller.email.touched">
-              <mat-icon matSuffix class="text-danger">error</mat-icon> 
-              <a class="text-danger">{{emailerrorMsg}} </a>
+              <i class="fas fa-exclamation-circle text-danger"> 
+                &nbsp;<a class="text-danger"  style="font-family: Roboto">{{emailerrorMsg}} </a>
+              </i>
             </div>
           </div>
           <!-- Password input -->
@@ -68,7 +69,6 @@
               </div>
               <input
                 type="password"
-                matInput
                 [type]="hide ? 'password' : 'text'"
                 ngModel
                 formControlName="password"
@@ -95,8 +95,9 @@
             loginFormcontroller.password.invalid &&
             loginFormcontroller.password.touched
           ">
-              <mat-icon matSuffix  class="text-danger">error</mat-icon>
-              <a class="text-danger" >{{passworderrorMsg}} </a>
+          <i class="fas fa-exclamation-circle text-danger"> 
+            &nbsp;<a class="text-danger"  style="font-family: Roboto">{{passworderrorMsg}} </a>
+          </i>
             </div>
           </div>
 
