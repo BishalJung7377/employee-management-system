@@ -6,4 +6,5 @@ export interface UserData {
     phone: number,
     intrest: string,
     field: string,
+    hours: number,
   }

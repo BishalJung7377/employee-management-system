@@ -42,6 +42,7 @@
                         <th scope="col">Phone</th>
                         <th scope="col">Intrest</th>
                         <th scope="col">Field</th>
+                        <th scope="col">Working hours</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -62,6 +63,7 @@
                         <td>{{ item.phone }} </td>
                         <td>{{ item.intrest }} </td>
                         <td>{{ item.field }} </td>
+                        <td>{{ item.hours }} hours</td>
                         <td>
                           <a (click)="open(content)">
                             <a
@@ -75,8 +77,14 @@
                             >
                           </a>
                           <a
-                            class="delete"
-                            (click)="deleteUser(item)"
+                           
+                          class="delete"
+                          mwlConfirmationPopover
+                          [popoverTitle]="popoverTitle"
+                          [popoverMessage]="popoverMessage"
+                          placement="left"
+                          (confirm)="deleteUser(item)"
+                          (cancel)="cancelClicked = true"
                             title="Delete"
                             data-toggle="tooltip"
                             ><i class="material-icons text-danger"
@@ -85,7 +93,7 @@
                           >
                         </td>
                       </tr>
-    
+                      <!-- (click)="deleteUser(item)" -->
                       <ng-template #elseBlock>
                         <td>No Data Found</td>
                       </ng-template>
@@ -128,7 +136,6 @@
                     </div>
                   </div>
             </ng-template>
-
             </div>
           </div>
           <hr class="my-4" />
@@ -183,7 +190,7 @@
                                 >Employee Salary</label
                               >
                               <input
-                                type="text"
+                                type="number"
                                 (keypress)="numberOnly($event)"
                                 class="form-control form-control-lg"
                                 name="salary"
@@ -284,6 +291,25 @@
                               <a class="text-danger">Employee field is required </a>
                             </div>
                           </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee working hours</label>
+                            <input
+                              type="number"
+                              (keypress)="numberOnly($event)"
+                              class="form-control form-control-lg"
+                              name="hours"
+                              size="40"
+                              formControlName="hours"
+                              placeholder="Enter your working hours Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.hours.invalid &&
+                            updateFormController.hours.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee working hours is required </a>
+                            </div>
+                          </div>
                         </div>
                       </form>
                     </div>
@@ -357,7 +383,7 @@
                                 >Employee Salary</label
                               >
                               <input
-                                type="text"
+                                type="number"
                                 (keypress)="numberOnly($event)"
                                 class="form-control form-control-lg"
                                 name="salary"
@@ -456,6 +482,26 @@
                             updateFormController.field.touched">
                               <mat-icon matSuffix class="text-danger">error</mat-icon>
                               <a class="text-danger">Employee field is required </a>
+                            </div>
+                          </div>
+                          <div class="user-info mt-4">
+                            <label for="createlIst">Employee working hours</label>
+                            <input
+                              type="number"
+                              (keypress)="numberOnly($event)"
+                              class="form-control form-control-lg"
+                              name="hours"
+                              size="40"
+                              formControlName="hours"
+                              name="hours"
+                              placeholder="Enter your working hours Here"
+                              required
+                            />
+                            <div 
+                            *ngIf="updateFormController.hours.invalid &&
+                            updateFormController.hours.touched">
+                              <mat-icon matSuffix class="text-danger">error</mat-icon>
+                              <a class="text-danger">Employee working hours is required </a>
                             </div>
                           </div>
                         </div>

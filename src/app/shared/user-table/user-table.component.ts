@@ -27,6 +27,10 @@ export class UserTableComponent implements OnInit {
   public closeResult: string = '';
   public userInfos: any;
   public addNewClicked : boolean = false;
+  public popoverTitle : string = 'Delete Employee Data';
+  public popoverMessage: string  = 'Are you sure want to delete employee data';
+  public confirmClicked : boolean = false;
+  public cancelClicked : boolean = false;
   constructor(
     private restService: ChartService,
     private formBuilder: FormBuilder,
@@ -50,10 +54,12 @@ export class UserTableComponent implements OnInit {
       name: ['', [Validators.required]],
       salary: ['' ,[Validators.required]],
       year: ['', [Validators.required]],
-      phone: [ , [Validators.required,  Validators.minLength(10)]],
+      phone: ['' , [Validators.required,  Validators.minLength(10)]],
       intrest: ['', [Validators.required]],
       field: ['', [Validators.required]],
+      hours: ['' , [Validators.required]],
     })
+    
   }
 
   getUserTableData(): void {
@@ -96,6 +102,7 @@ export class UserTableComponent implements OnInit {
             phone: [this.userInfos.phone],
             intrest: [this.userInfos.intrest],
             field: [this.userInfos.field],
+            hours: [this.userInfos.hours],
           });
         }
       )
@@ -111,6 +118,8 @@ export class UserTableComponent implements OnInit {
           this.toastr.success('Employee Data Updated Successfully', 'Updated', {});
           this.refreshApiData()
         })
+        console.log(this.getUserInformation.value);
+        
     }
   }
 
@@ -138,7 +147,6 @@ export class UserTableComponent implements OnInit {
   }
 
   addNewUser(testContent:any) : void {
-    this.addNewClicked = true;
     if(this.addNewClicked = true){
       this.modalService.open(testContent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getUserInformation.reset();
@@ -151,6 +159,11 @@ export class UserTableComponent implements OnInit {
   }
 
   addNewEmployee(): void{
+    const formData = new FormData();
+    formData.append('name', this.getUserInformation.value.name);
+    formData.append('name', this.getUserInformation.value.salary);
+    formData.append('name', this.getUserInformation.value.hours);
+
     if (this.getUserInformation.valid) {
       this.userDataService.addNewEmployee(
         this.getUserInformation.value
@@ -160,6 +173,7 @@ export class UserTableComponent implements OnInit {
           this.toastr.success('Employee Data Added Successfully', 'New Employee Added', {});
           this.refreshApiData()
         })
+        console.log(parseInt( this.getUserInformation.value.hours), `asdasd`);
     }
   }
 

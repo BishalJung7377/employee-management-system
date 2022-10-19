@@ -19,5 +19,6 @@ export interface newEmployee {
   phone: number,
   intrest: string,
   field: string,
+  hours: number,
 }
 

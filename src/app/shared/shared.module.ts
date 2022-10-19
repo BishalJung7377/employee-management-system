@@ -21,6 +21,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AuthGuard } from '../core/guards/auth.guard';
 import {ToastrModule} from "ngx-toastr";
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,6 +43,9 @@ import {ToastrModule} from "ngx-toastr";
     MatProgressSpinnerModule,
     MatProgressBarModule,
     ToastrModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })
   ],
   declarations: [
     PieChartComponent,
@@ -66,7 +70,9 @@ import {ToastrModule} from "ngx-toastr";
     Ng2OrderModule,
     MatTooltipModule,
     MatProgressBarModule,
-    ToastrModule
+    ToastrModule,
+    ConfirmationPopoverModule
+
   ],
   providers: [
     AuthGuard,

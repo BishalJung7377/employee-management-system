@@ -34,13 +34,15 @@ export class PieChartComponent implements AfterViewInit {
 
   ngOnInit() : void  {
     this.isLoading = true;
-    this.chartDatas.getPieChartData()
+    this.chartDatas.getChartInfo()
       .subscribe(
         res => {
           this.pieData = res;
-          for (let i = 0; i < this.pieData.length; i++) {
-            this.pieLabel.push(this.pieData[i].name);
-            this.pieWorkhours.push(this.pieData[i].hours);
+          if (this.pieData != null) {
+            for (let i = 0; i < this.pieData.length; i++) {
+              this.pieLabel.push(this.pieData[i].name);
+              this.pieWorkhours.push(this.pieData[i].hours);
+            }
           }
         }
       )
@@ -79,5 +81,6 @@ export class PieChartComponent implements AfterViewInit {
     }
     this.averageHours = sum /this.pieWorkhours.length;
     this.workingHours.emit(`${this.averageHours.toFixed(0)} Hours`);
+    console.log(this.averageHours);
   }
 }
