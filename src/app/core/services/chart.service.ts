@@ -13,12 +13,12 @@ export class ChartService {
    ) { }
 
    getChartInfo(){
-    const url = environment.apiURL + 'employe-datas'
+    const url = environment.baseurl + 'employe-datas'
     return this.http.get<UserData[]>(url)
    }
 
    getPieChartData(){
-    const url = environment.apiURL + 'workinghours'
+    const url = environment.baseurl + 'workinghours'
     return this.http.get(url)
    }
    

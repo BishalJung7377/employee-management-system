@@ -23,14 +23,14 @@ export class AuthService {
   }
 
   signup(data: newUsers) {
-    const url = environment.apiURL + 'signup'
+    const url = environment.baseurl + 'signup'
     return this.http.post<newUsers>(
       url, data
     )
   }
 
   login(): Observable<User[]> {
-    const url = environment.apiURL + 'signup'
+    const url = environment.baseurl + 'signup'
     return this.http.get<User[]>(url)
   }
 

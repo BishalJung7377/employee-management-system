@@ -1,12 +1,27 @@
 @import "../custom";
 @import "../components/variables";
-.menu {
-    li {
-        padding: 0.5em 1em 0em 1.2em;
-    }
-    a {
-        color: $black;
-        text-transform: $capitaliz;
-        font-weight: 600;
-    }
+@import "../components/button";
+
+.btn-label {
+  position: relative;
+  left: -12px;
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px 0 0 3px;
+}
+.btn-labeled {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.logout-btn {
+  margin-bottom: 10px;
+  background-color: #b0cece;
+}
+
+.logout-btn:hover,
+.logout-btn:active,
+.logout-btn:focus,
+.logout-btn:visited {
+  background-color:  #088F8F;
 }

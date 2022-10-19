@@ -14,22 +14,22 @@ export class UserDataService {
 
 
   deleteUser(employee: any){
-    const url = environment.apiURL + this.apiConst + '/' + employee.id;
+    const url = environment.baseurl + this.apiConst + '/' + employee.id;
     return this.http.delete(url)
   }
 
   getIndividualUser(employee: any){
-    const url = environment.apiURL +  this.apiConst + '/' + employee.id;
+    const url = environment.baseurl +  this.apiConst + '/' + employee.id;
     return this.http.get(url)
   }
 
   updateUserInformation(id : number, data: string[]){
-    const url = environment.apiURL +  this.apiConst + '/' + id;
+    const url = environment.baseurl +  this.apiConst + '/' + id;
     return this.http.put(url, data)
   }
 
   addNewEmployee(data:newEmployee){
-    const url = environment.apiURL +  this.apiConst;
+    const url = environment.baseurl +  this.apiConst;
     return this.http.post<newEmployee>(url, data)
   }
 

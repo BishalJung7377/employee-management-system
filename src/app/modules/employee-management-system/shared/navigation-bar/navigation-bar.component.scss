@@ -1,19 +1,17 @@
-@import "../../../../../scss/components/button";
-
 .btn-label {
-  position: $positionRelative;
-  left: $negtwelvePxx;
-  display: $display-inline;
-  padding: 6px $twelvePxx;
+  position: relative;
+  left: -12px;
+  display: inline-block;
+  padding: 6px 12px;
   background: rgba(0, 0, 0, 0.15);
-  border-radius: $threePx $zeroValue $zeroValue $threePx;
+  border-radius: 3px 0 0 3px;
 }
 .btn-labeled {
-  padding-top: $zeroValue;
-  padding-bottom: $zeroValue;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .logout-btn {
-  margin-bottom: $margin10;
+  margin-bottom: 10px;
   background-color: #b0cece;
 }
 
@@ -21,5 +19,5 @@
 .logout-btn:active,
 .logout-btn:focus,
 .logout-btn:visited {
-  background-color:  $cadet-blue;
+  background-color:  #088F8F;
 }
