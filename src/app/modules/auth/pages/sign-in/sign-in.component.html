@@ -111,6 +111,7 @@
               type="submit"
               class="btn btn-primary btn-lg"
               [disabled]="!loginForm.valid"
+              [ngClass]="{ 'disabled': !loginForm.valid }"
               style="padding-left: 2.5rem; padding-right: 2.5rem ml-2"
               >
               Login

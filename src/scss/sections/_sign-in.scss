@@ -19,6 +19,13 @@
     transition: $transition;
     margin-top: 0.8em;
 }
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: auto !important;
+    cursor: not-allowed !important;
+  }
+
 .divider:after,
 .divider:before {
 content: "";
