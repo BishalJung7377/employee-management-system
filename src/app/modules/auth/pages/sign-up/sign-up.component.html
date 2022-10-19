@@ -103,8 +103,7 @@
             </div>
             <div  *ngIf="
             signupFormcontroller.email.invalid &&
-            signupFormcontroller.email.touched
-          ">
+            signupFormcontroller.email.touched && signupFormcontroller.email.errors">
           <i class="fas fa-exclamation-circle text-danger"> 
             &nbsp;<a class="text-danger"  style="font-family: Roboto">{{emailerrorMsg}} </a>
           </i>

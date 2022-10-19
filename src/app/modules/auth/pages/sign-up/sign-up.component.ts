@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit {
   public confirmpasswordLabel: string = 'Confirm Password';
   public signupLabel: string = "Sign Up Here";
   public remembermeLabel: string = "Remember me";
-  public emailerrorMsg: string = 'Email is required*';
+  public emailerrorMsg: string = 'Valid email with @ required*';
   public usernameerrorMsg: string = 'Username is required*';
   public phoneerrorMsg: string = 'Phone number is required*';
   public passworderrorMsg: string = 'Password is required*';

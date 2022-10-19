@@ -54,7 +54,7 @@ export class UserTableComponent implements OnInit {
       name: ['', [Validators.required]],
       salary: ['' ,[Validators.required]],
       year: ['', [Validators.required]],
-      phone: ['' , [Validators.required,  Validators.minLength(10)]],
+      phone: ['' , [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       intrest: ['', [Validators.required]],
       field: ['', [Validators.required]],
       hours: ['' , [Validators.required]],
@@ -117,9 +117,7 @@ export class UserTableComponent implements OnInit {
         .subscribe(res => {
           this.toastr.success('Employee Data Updated Successfully', 'Updated', {});
           this.refreshApiData()
-        })
-        console.log(this.getUserInformation.value);
-        
+        }) 
     }
   }
 
@@ -173,7 +171,6 @@ export class UserTableComponent implements OnInit {
           this.toastr.success('Employee Data Added Successfully', 'New Employee Added', {});
           this.refreshApiData()
         })
-        console.log(parseInt( this.getUserInformation.value.hours), `asdasd`);
     }
   }
 

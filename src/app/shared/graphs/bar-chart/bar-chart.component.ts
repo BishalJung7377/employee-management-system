@@ -47,7 +47,7 @@ export class BarChartComponent implements OnInit {
       data: {
         labels: nameData,
         datasets: [{
-          label: 'Employee Salary in thousand',
+          label: 'Employee Salary',
           data: realData,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',

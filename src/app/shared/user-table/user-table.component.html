@@ -58,7 +58,7 @@
                       >
                         <td scope="row">{{ item.id }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.salary | currency:'USD' }} k</td>
+                        <td>{{ item.salary | currency:'USD' }}</td>
                         <td>{{ item.year }} years</td>
                         <td>{{ item.phone }} </td>
                         <td>{{ item.intrest }} </td>
@@ -243,19 +243,25 @@
                               size="40"
                               formControlName="phone"
                               name="phone"
+                              minlength="10"
+                              maxlength="10"
                               placeholder="Enter phone number Here"
                               required
                             />
                             <div 
                             *ngIf="updateFormController.phone.invalid &&
                             updateFormController.phone.touched">
-                               <i class="fas fa-exclamation-circle text-danger"> 
+                            <i class="fas fa-exclamation-circle text-danger"> 
                               &nbsp;<a class="text-danger"  style="font-family: Roboto">Phone number is required* </a>
                             </i>
                             </div>
+                            <div *ngIf="updateFormController.phone.errors">
+                              <i class="fas fa-exclamation-circle text-danger"> 
+                                &nbsp;<a class="text-danger"  style="font-family: Roboto">Please Enter 10 digit Mobile Number* </a>
+                              </i></div>  
                           </div>
                           <div class="user-info mt-4">
-                            <label for="createlIst">Employee Intrest</label>
+                            <label for="createlIst">Employee Interest</label>
                             <input
                               type="intrest"
                               (keypress)="textOnly($event)"
@@ -271,7 +277,7 @@
                             *ngIf="updateFormController.intrest.invalid &&
                             updateFormController.intrest.touched">
                             <i class="fas fa-exclamation-circle text-danger"> 
-                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee Intrest is required* </a>
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Employee Interest is required* </a>
                             </i>
                             </div>
                           </div>
@@ -453,9 +459,13 @@
                               &nbsp;<a class="text-danger"  style="font-family: Roboto">Phone number is required* </a>
                             </i>
                             </div>
+                            <div *ngIf="updateFormController.phone.touched &&  updateFormController.phone.touched && updateFormController.phone.errors">
+                              <i class="fas fa-exclamation-circle text-danger"> 
+                                &nbsp;<a class="text-danger"  style="font-family: Roboto">Please Enter 10 digit Mobile Number* </a>
+                              </i></div> 
                           </div>
                           <div class="user-info mt-4">
-                            <label for="createlIst">Employee Intrest</label>
+                            <label for="createlIst">Employee interest</label>
                             <input
                               type="intrest"
                               (keypress)="textOnly($event)"
@@ -471,7 +481,7 @@
                             *ngIf="updateFormController.intrest.invalid &&
                             updateFormController.intrest.touched">
                             <i class="fas fa-exclamation-circle text-danger"> 
-                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Emplopyee intrest is required* </a>
+                              &nbsp;<a class="text-danger"  style="font-family: Roboto">Emplopyee interest is required* </a>
                             </i>
                             </div>
                           </div>

@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   public passwordLabel: string = 'Password';
   public signinLabel: string = "Sign in with";
   public remembermeLabel: string = "Remember me";
-  public emailerrorMsg: string = 'Email is required*';
+  public emailerrorMsg: string = 'Valid email with @ required*';
   public passworderrorMsg: string = 'Password is required*';
   public forgetPassword: string = 'Forgot Password?';
   public notRegister: string = "Don't have an account?";
