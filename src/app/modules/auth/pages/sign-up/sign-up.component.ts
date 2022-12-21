@@ -52,7 +52,7 @@ export class SignUpComponent implements OnInit {
     this.initialize();
   }
 
-  initialize(): void {
+   initialize(): void {
     this.signupForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       phonenumber: ['', [Validators.required, Validators.minLength(10)]],
@@ -81,17 +81,22 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
+    ///on submit function is called when user press sign up button to create account, 
+    // this function sends data to API to create account
     if (this.signupForm.valid) {
       this.authentication.signup(this.signupForm.value).subscribe(
         (response) => {
           this.signupForm.reset();
           window.location.href = '';
           this.toastr.success('Signed up is Successfull', 'Signed Up', {});
+          //this will reset the form and reload the page concomitantly displaying user created message
         }
       )
     }
     else {
       this.toastr.error('Unable to Signed up is Successfull', 'Signed Up Error', {});
+     //if there is error during creating account this message will pop up
+
     }
   }
 
@@ -108,12 +113,14 @@ export class SignUpComponent implements OnInit {
   }
 
   numberOnly(event: { key: string }): boolean {
+    //this function is created to allow user to enter number only in certain field like phone number field
     let pattern = /^([0-9])$/;
     let result = pattern.test(event.key);
     return result;
   }
 
   textOnly(event: { key: string }): boolean {
+    //this function is created to allow user to enter text only in certain field like phone number field
     let textPattern = /^[A-Za-z\s]*$/;
     let res = textPattern.test(event.key);
     return res;
